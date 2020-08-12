@@ -44,7 +44,7 @@ public:
   int currentIndex() const;
   void setCurrentIndex(const auto index);
   QVector<CircularButton *> getArrayOfIndicator() const;
-
+  int indexOf(CircularButton *);
 signals:
   void clicked(const QString &text);
   void animationSpeedChanged(int speed);

@@ -56,6 +56,7 @@ void QIndicator::onClicked(const QString &text) { qDebug() << text; }
 
 void QIndicator::onIndicatorClicked() {
   auto *indicator = qobject_cast<CircularButton *>(sender());
+  qInfo() << indexOf(indicator);
   m_currentIndex = arrayOfIndicator.indexOf(indicator);
   setCurrentIndex(m_currentIndex);
   if (pre_index == currentIndex()) {
@@ -120,9 +121,6 @@ void QIndicator::handleRightClicked() {
     arrayOfIndicator[pre_index]->move(arrayOfIndicator[pre_index]->x(),
                                       arrayOfIndicator[pre_index]->y());
   }
-
-  qInfo() << "current index: " << currentIndex();
-  qInfo() << "pre index: " << pre_index;
   QPropertyAnimation *animation =
       new QPropertyAnimation(arrayOfIndicator[m_currentIndex], "geometry");
   animation->setDuration(m_animationSpeed);
@@ -174,9 +172,7 @@ void QIndicator::handleLeftClicked() {
   if (pre_index == currentIndex()) {
     pre_index = arrayOfIndicator.length() - 1;
   }
-  //  if (pre_index == 0) {
-  //    pre_index = 0;
-  //  }
+
   if (currentIndex() < 0) {
     setCurrentIndex(arrayOfIndicator.length() - 1);
   }
@@ -215,9 +211,6 @@ void QIndicator::handleLeftClicked() {
   animgroup->addAnimation(animation1);
   animgroup->start(QParallelAnimationGroup::DeletionPolicy::DeleteWhenStopped);
 
-  //  if (pre_index == 0 && currentIndex() == 1) {
-  //    setCurrentIndex(currentIndex() - 1);
-  //  }
   if (pre_index == 0) {
     pre_index--;
   }
@@ -301,4 +294,8 @@ void QIndicator::setCurrentIndex(const auto index) { m_currentIndex = index; }
 
 QVector<CircularButton *> QIndicator::getArrayOfIndicator() const {
   return arrayOfIndicator;
+}
+
+int QIndicator::indexOf(CircularButton *button) {
+  return arrayOfIndicator.indexOf(button);
 }
