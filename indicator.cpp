@@ -1,4 +1,4 @@
-#include "indicator.h".h "
+#include "indicator.h"
 #include "circularbutton.h"
 #include <QDebug>
 #include <QGesture>
